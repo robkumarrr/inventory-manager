@@ -37,3 +37,18 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+declare module '@tailwindcss/vite' {
+    import { Plugin } from 'vite'
+    export default function tailwindcss(): Plugin
+}
+
+declare module '@vitejs/plugin-vue' {
+    import { Plugin } from 'vite'
+    export interface Options {
+        template?: {
+            transformAssetUrls?: Record<string, any>
+        }
+    }
+    export default function vue(options?: Options): Plugin
+}

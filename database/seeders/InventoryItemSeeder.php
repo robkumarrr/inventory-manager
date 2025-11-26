@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\InventoryItem;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class InventoryItemSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        InventoryItem::factory(15)->create();
     }
 }

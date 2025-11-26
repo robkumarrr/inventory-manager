@@ -16,8 +16,9 @@ class InventoryItemController extends Controller
 
         Log::info('Returning InventoryItemController index');
 
-        return Inertia::render('Dashboard', [
-            InventoryItem::all()
+        return Inertia::render('Welcome', [
+            'inventoryItems' => InventoryItem::all(),
+            'canRegister' => fn() => !auth()->user()
         ]);
     }
 }

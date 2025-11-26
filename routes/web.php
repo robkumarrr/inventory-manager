@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InventoryItemController;
+use App\Models\InventoryItem;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -8,6 +9,7 @@ use Laravel\Fortify\Features;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canRegister' => Features::enabled(Features::registration()),
+        'inventoryItems' => InventoryItem::all(),
     ]);
 })->name('home');
 

@@ -3,9 +3,18 @@ import { dashboard, login, register } from '@/routes';
 import { Head, Link } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 
+interface InventoryItem {
+    id: number,
+    name: string,
+    quantity: number,
+    sku: string,
+    notification_sent: boolean
+}
+
 withDefaults(
     defineProps<{
         canRegister: boolean;
+        inventoryItems: InventoryItem[];
     }>(),
     {
         canRegister: true,
@@ -53,13 +62,38 @@ withDefaults(
             class="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0"
         >
             <main
-                class="flex w-full max-w-[335px] flex-col-reverse overflow-hidden rounded-lg lg:max-w-4xl lg:flex-row"
+                class="flex w-full max-w-[335px] flex-row overflow-hidden rounded-lg lg:max-w-4xl lg:flex-row gap-3"
             >
+                <div
+                    class="flex-1 rounded-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
+                >
+                    Welcome to my Inventory Item Job Test Website
+                </div>
+
                 <div
                     class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
                 >
-                    Welcome to my Inventory Item Job Test Website
-                    <Link :href="route('inventory_item.index')">All Inventory Items</Link>
+                    <div>
+                        <h1 class="text-center text-3xl font-bold tracking-tight">All Inventory Items</h1>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>SKU</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(inventoryItem, index) in inventoryItems" :key="index">
+                                <td>{{inventoryItem.id}}</td>
+                                <td>{{inventoryItem.name}}</td>
+                                <td>{{inventoryItem.quantity}}</td>
+                                <td>{{inventoryItem.sku}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </main>
         </div>

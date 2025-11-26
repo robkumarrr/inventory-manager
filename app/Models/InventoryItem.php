@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class InventoryItem extends Model
 {
+    Use HasFactory;
     /**
      * Properties of the Model that are fillable.
      *

@@ -24,7 +24,8 @@ class InventoryItemFormRequest extends FormRequest
         return [
             'name' => 'string|required',
             'quantity' => 'integer|required|gt:0',
-            'sku' => 'string|required'
+            'sku' => 'string|required',
+            'notification_sent' => 'required|boolean'
         ];
     }
 }

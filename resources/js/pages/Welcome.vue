@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { dashboard, login, register } from '@/routes';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 
 interface InventoryItem {
@@ -10,6 +10,18 @@ interface InventoryItem {
     sku: string,
     notification_sent: boolean
 }
+
+interface InventoryItemForm {
+    name: string;
+    quantity: number;
+    sku: string;
+}
+
+const formData = useForm<InventoryItemForm>({
+    name: '',
+    quantity: 0,
+    sku: '',
+})
 
 withDefaults(
     defineProps<{
@@ -62,7 +74,7 @@ withDefaults(
             class="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0"
         >
             <main
-                class="flex w-full max-w-[335px] flex-row overflow-hidden rounded-lg lg:max-w-4xl lg:flex-row gap-3"
+                class="flex w-full max-w-[335px] flex-col overflow-hidden rounded-lg lg:max-w-4xl lg:flex-col gap-3"
             >
                 <div
                     class="flex-1 rounded-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
@@ -94,6 +106,18 @@ withDefaults(
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                    <form @submit.prevent="formData.post(route('inventory_item.create'))" class="flex flex-col gap-3 items-center">
+                        <h1>Add a New Inventory Item</h1>
+                        <label>Name: <input v-model="formData.name" type="text" placeholder="Add a name for this new item..."/></label>
+                        <div class="text-red-500" v-if="formData.errors.name">{{formData.errors.name}}</div>
+                        <label>Quantity: <input v-model="formData.name" type="number" placeholder="Add quantity for this new item..."/></label>
+                        <div class="text-red-500" v-if="formData.errors.quantity">{{formData.errors.quantity}}</div>
+                        <label>SKU: <input v-model="formData.name" type="text" maxlength="10" placeholder="Add a SKU for this new item..."/></label>
+                        <div class="text-red-500" v-if="formData.errors.sku">{{formData.errors.sku}}</div>
+                        <button type="submit" class="w-fit px-4 py-0.5 rounded-xl hover:cursor-pointer bg-blue-500 hover:bg-blue-600 transition-all duration-300">Submit</button>
+                    </form>
                 </div>
             </main>
         </div>

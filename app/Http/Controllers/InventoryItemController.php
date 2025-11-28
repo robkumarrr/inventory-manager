@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InventoryItemFormRequest;
 use App\Models\InventoryItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class InventoryItemController extends Controller
 {
     /**
      * @return \Inertia\Response
      */
-    public function index() {
+    public function index(): Response {
 
         Log::info('Returning InventoryItemController index');
 
@@ -20,5 +22,15 @@ class InventoryItemController extends Controller
             'inventoryItems' => InventoryItem::all(),
             'canRegister' => fn() => !auth()->user()
         ]);
+    }
+
+    public function create(InventoryItemFormRequest $request): Response {
+        Log::info('Attempting to create a new inventory item.');
+
+        $data = $request->validated();
+
+        Log::info('Data validated, the new inventory item is being added to the database.', $data);
+
+        return $this->index();
     }
 }

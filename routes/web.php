@@ -20,4 +20,7 @@ Route::get('dashboard', function () {
 Route::get('/inventory_items', [InventoryItemController::class, 'index'])
     ->middleware(['auth', 'verified'])->name('inventory_item.index');
 
+Route::post('/create_inventory_item', [InventoryItemController::class, 'create'])
+    ->middleware(['auth', 'verified'])->name('inventory_item.create');
+
 require __DIR__.'/settings.php';

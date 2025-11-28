@@ -30,7 +30,11 @@ class InventoryItemController extends Controller
 
         $data = $request->validated();
 
-        Log::info('Data validated, the new inventory item is being added to the database.', $data);
+        $newItem = InventoryItem::create($data);
+
+        if ($newItem) {
+            Log::info('Data validated, the new inventory item is being added to the database.', $data);
+        }
 
         return redirect()->back();
     }

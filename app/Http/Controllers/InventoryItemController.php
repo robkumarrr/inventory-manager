@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InventoryItemFormRequest;
 use App\Models\InventoryItem;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -24,13 +25,13 @@ class InventoryItemController extends Controller
         ]);
     }
 
-    public function create(InventoryItemFormRequest $request): Response {
+    public function create(InventoryItemFormRequest $request):  RedirectResponse {
         Log::info('Attempting to create a new inventory item.');
 
         $data = $request->validated();
 
         Log::info('Data validated, the new inventory item is being added to the database.', $data);
 
-        return $this->index();
+        return redirect()->back();
     }
 }

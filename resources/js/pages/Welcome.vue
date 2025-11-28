@@ -110,12 +110,16 @@ withDefaults(
                 <div class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                     <form @submit.prevent="formData.post(route('inventory_item.create'))" class="flex flex-col gap-3 items-center">
                         <h1>Add a New Inventory Item</h1>
+                        <!--FIXME: need to make sure the form is submitting correctly, and then redirecting back to this page-->
                         <label>Name: <input v-model="formData.name" type="text" placeholder="Add a name for this new item..."/></label>
                         <div class="text-red-500" v-if="formData.errors.name">{{formData.errors.name}}</div>
-                        <label>Quantity: <input v-model="formData.name" type="number" placeholder="Add quantity for this new item..."/></label>
+
+                        <label>Quantity: <input v-model="formData.quantity" type="number" placeholder="Add quantity for this new item..."/></label>
                         <div class="text-red-500" v-if="formData.errors.quantity">{{formData.errors.quantity}}</div>
-                        <label>SKU: <input v-model="formData.name" type="text" maxlength="10" placeholder="Add a SKU for this new item..."/></label>
+
+                        <label>SKU: <input v-model="formData.sku" type="text" maxlength="10" placeholder="Add a SKU for this new item..."/></label>
                         <div class="text-red-500" v-if="formData.errors.sku">{{formData.errors.sku}}</div>
+
                         <button type="submit" class="w-fit px-4 py-0.5 rounded-xl hover:cursor-pointer bg-blue-500 hover:bg-blue-600 transition-all duration-300">Submit</button>
                     </form>
                 </div>

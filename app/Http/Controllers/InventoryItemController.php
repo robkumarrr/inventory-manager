@@ -25,7 +25,7 @@ class InventoryItemController extends Controller
         ]);
     }
 
-    public function create(InventoryItemFormRequest $request):  RedirectResponse {
+    public function store(InventoryItemFormRequest $request):  RedirectResponse {
         Log::info('Attempting to create a new inventory item.');
 
         $data = $request->validated();
@@ -37,5 +37,11 @@ class InventoryItemController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function delete(InventoryItem $item) {
+        Log::info('Attempting to delete an inventory item', ["item" => $item]);
+
+        $item->delete();
     }
 }

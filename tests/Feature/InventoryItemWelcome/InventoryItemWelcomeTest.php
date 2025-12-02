@@ -28,6 +28,7 @@ it('tests if the correct props are passed with the route', function() {
     );
 });
 
+//TODO: talk about this test with Felipe, but leave it here for now
 it('tests if the form is submitted with the correct fields', function()
 {
     $user = User::factory()->create();
@@ -53,4 +54,39 @@ it('tests if the form is submitted with the correct fields', function()
         'sku' => 'abcde12345',
         'notification_sent' => false,
     ])->and($validated)->not->toHaveKey('bad_key');
+});
+
+it('tests if a user can create an inventory item with valid data', function() {
+   $user = User::factory()->create();
+
+   $this->actingAs($user);
+
+   $response = $this->post(route('inventory_item.create'), [
+       'name' => 'test',
+       'quantity' => 14,
+       'sku' => 'abcde12345',
+       'notification_sent' => false,
+       'bad_key' => 'bad_value'
+   ]);
+
+   $response->assertRedirect('/');
+
+   $this->assertDatabaseHas('inventory_items', [
+       'name' => 'test',
+       'quantity' => 14,
+       'sku' => 'abcde12345',
+       'notification_sent' => false,
+   ]);
+});
+
+it('tests if a user can not create an inventory item with invalid data', function() {
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    $response = $this->post(route('inventory_item.create'), [
+        'bad_key' => 'bad_value'
+    ]);
+
+    $this->assertDatabaseEmpty('inventory_items');
 });

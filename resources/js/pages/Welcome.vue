@@ -112,8 +112,6 @@ withDefaults(
                 <div class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                     <form @submit.prevent="formData.post(route('inventory_item.create'))" class="flex flex-col gap-3 items-center">
                         <h1>Add a New Inventory Item</h1>
-                        <!--FIXME: issue with null on the notification sent.... check that out:
-                          Integrity constraint violation: 19 NOT NULL constraint failed: inventory_items.notification_sent (Connection: sqlite, SQL: insert into "inventory_items" ("name", "quantity", "sku", "updated_at", "created_at") values (Chocolate Milk, 45, dj189djm12, 2025-11-28 20:45:00, 2025-11-28 20:45:00)) -->
                         <label>Name: <input v-model="formData.name" type="text" placeholder="Add a name for this new item..."/></label>
                         <div class="text-red-500" v-if="formData.errors.name">{{formData.errors.name}}</div>
 

@@ -78,7 +78,7 @@ it('tests if a user can not create an inventory item with invalid data', functio
 
     $this->assertDatabaseEmpty('inventory_items');
 });
-//TODO: add inventory-item.update test
+
 it('tests if an inventory item can be deleted from the database', function () {
     $item = InventoryItem::factory()->create();
 

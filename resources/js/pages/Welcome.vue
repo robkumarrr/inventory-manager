@@ -94,40 +94,85 @@ withDefaults(
                             All Inventory Items
                         </h1>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                                <th>SKU</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(inventoryItem, index) in inventoryItems"
-                                :key="index"
-                            >
-                                <td>{{ inventoryItem.id }}</td>
-                                <td>{{ inventoryItem.name }}</td>
-                                <td>{{ inventoryItem.quantity }}</td>
-                                <td>{{ inventoryItem.sku }}</td>
-                                <td>
-                                    <Link
-                                        class="hover:cursor-pointer"
-                                        :href="
-                                            route(
-                                                'inventory-item.delete',
-                                                inventoryItem.id,
-                                            )
-                                        "
-                                        method="delete"
-                                        >DELETE ITEM</Link
+                    <div class="overflow-x-auto">
+                        <table
+                            class="min-w-full divide-y divide-gray-200 rounded-lg border border-gray-200"
+                        >
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
                                     >
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                        ID
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                    >
+                                        Name
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                    >
+                                        Quantity
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                    >
+                                        SKU
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                    >
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                <tr
+                                    v-for="inventoryItem in inventoryItems"
+                                    :key="inventoryItem.id"
+                                    class="transition-colors hover:bg-gray-50"
+                                >
+                                    <td
+                                        class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                                    >
+                                        {{ inventoryItem.id }}
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                                    >
+                                        {{ inventoryItem.name }}
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                                    >
+                                        {{ inventoryItem.quantity }}
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                                    >
+                                        {{ inventoryItem.sku }}
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm whitespace-nowrap"
+                                    >
+                                        <Link
+                                            :href="
+                                                route(
+                                                    'inventory-item.delete',
+                                                    inventoryItem.id,
+                                                )
+                                            "
+                                            method="delete"
+                                            class="font-medium text-red-600 transition-colors hover:text-red-900 hover:cursor-pointer"
+                                        >
+                                            Delete
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div
                     class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"

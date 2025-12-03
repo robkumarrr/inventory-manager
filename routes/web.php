@@ -23,9 +23,11 @@ Route::get('/inventory_items', [InventoryItemController::class, 'index'])
 Route::post('/inventory_item/store', [InventoryItemController::class, 'store'])
     ->middleware(['auth', 'verified'])->name('inventory_item.store');
 
-// note to self: the {item} must match the name of the parameter in the delete method on
-// the controller.
+// note to self: the {item} must match the name of the parameter in the delete method on the controller.
 Route::delete('/inventory_item/delete/{item}', [InventoryItemController::class, 'delete'])
     ->middleware(['auth', 'verified'])->name('inventory-item.delete');
+
+Route::patch('inventory_item/update/{item}', [InventoryItemController::class, 'update'])
+    ->middleware(['auth', 'verified'])->name('inventory-item.update');
 
 require __DIR__.'/settings.php';

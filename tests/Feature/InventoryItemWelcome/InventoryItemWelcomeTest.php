@@ -55,15 +55,13 @@ it('tests if the form is submitted with the correct fields', function () {
 });
 
 it('tests if a user can create an inventory item with valid data', function () {
-    $response = $this->post(route('inventory_item.store'), [
+    $this->post(route('inventory_item.store'), [
         'name' => 'test',
         'quantity' => 14,
         'sku' => 'abcde12345',
         'notification_sent' => false,
         'bad_key' => 'bad_value'
-    ]);
-
-    $response->assertRedirect('/');
+    ])->assertRedirect('/');
 
     $this->assertDatabaseHas('inventory_items', [
         'name' => 'test',
@@ -94,7 +92,14 @@ it('tests if an inventory item can be deleted from the database', function () {
 it('updates an inventory item in the database', function () {
     $item = InventoryItem::factory()->create();
 
-    $this->put(route('inventory-item.update', [
+    $updatedFields = [
+        'name' => 'test',
+        'quantity' => 15,
+    ];
 
-    ]));
+    $this->put(route('inventory-item.update', ['item' => $item, 'updated_fields' => $updatedFields]));
+
+    $item->update($updatedFields);
+
+    $this->assertDatabaseHas('inventory_items', [ 'id' => $item->id, 'name' => 'test']);
 });

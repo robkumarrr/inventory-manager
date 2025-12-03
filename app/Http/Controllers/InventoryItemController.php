@@ -44,4 +44,12 @@ class InventoryItemController extends Controller
 
         $item->delete();
     }
+
+    public function update(InventoryItem $item, InventoryItemFormRequest $request) {
+        Log::info('Attempting to update an inventory item', ["item" => $item]);
+
+        $data = $request->validated();
+
+        $item->update($data);
+    }
 }

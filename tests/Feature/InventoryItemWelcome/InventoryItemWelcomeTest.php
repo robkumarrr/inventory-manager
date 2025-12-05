@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Requests\InventoryItemFormRequest;
+use App\Jobs\InventoryItemCreateJob;
 use App\Models\InventoryItem;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
@@ -55,6 +56,8 @@ it('tests if the form is submitted with the correct fields', function () {
 });
 
 it('tests if a user can create an inventory item with valid data', function () {
+    Queue::fake();
+
     $this->post(route('inventory_item.store'), [
         'name' => 'test',
         'quantity' => 14,
@@ -62,6 +65,8 @@ it('tests if a user can create an inventory item with valid data', function () {
         'notification_sent' => false,
         'bad_key' => 'bad_value'
     ])->assertRedirect('/');
+
+    Queue::assertPushed(InventoryItemCreateJob::class);
 
     $this->assertDatabaseHas('inventory_items', [
         'name' => 'test',
@@ -71,8 +76,8 @@ it('tests if a user can create an inventory item with valid data', function () {
     ]);
 });
 
-it('tests if a user can not create an inventory item with invalid data', function () {
-    $response = $this->post(route('inventory_item.store'), [
+it('tests if a user can only create an inventory item with valid data', function () {
+    $this->post(route('inventory_item.store'), [
         'bad_key' => 'bad_value'
     ]);
 

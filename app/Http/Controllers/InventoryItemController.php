@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InventoryItemFormRequest;
-use App\Jobs\InventoryItemCreateJob;
+use App\Jobs\InventoryItemStoreJob;
 use App\Models\InventoryItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,7 +33,7 @@ class InventoryItemController extends Controller
 
 //        $newItem = InventoryItem::create($data);
 
-        InventoryItemCreateJob::dispatch($data);
+        InventoryItemStoreJob::dispatch($data);
 
 //        if ($newItem) {
 //            Log::info('Data validated, the new inventory item is being added to the database.', $data);

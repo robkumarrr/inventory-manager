@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Requests\InventoryItemFormRequest;
-use App\Jobs\InventoryItemCreateJob;
+use App\Jobs\InventoryItemStoreJob;
 use App\Models\InventoryItem;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
@@ -57,7 +57,7 @@ it('tests if the form is submitted with the correct fields', function () {
 
 it('tests if a user can create an inventory item with valid data', function () {
     Queue::fake();
-
+    // FIXME: test needs to pass
     $this->post(route('inventory_item.store'), [
         'name' => 'test',
         'quantity' => 14,
@@ -66,7 +66,7 @@ it('tests if a user can create an inventory item with valid data', function () {
         'bad_key' => 'bad_value'
     ])->assertRedirect('/');
 
-    Queue::assertPushed(InventoryItemCreateJob::class);
+    Queue::assertPushed(InventoryItemStoreJob::class);
 
     $this->assertDatabaseHas('inventory_items', [
         'name' => 'test',

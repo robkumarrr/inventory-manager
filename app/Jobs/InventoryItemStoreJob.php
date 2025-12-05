@@ -5,8 +5,9 @@ namespace App\Jobs;
 use App\Models\InventoryItem;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
 
-class InventoryItemCreateJob implements ShouldQueue
+class InventoryItemStoreJob implements ShouldQueue
 {
     use Queueable;
 
@@ -20,6 +21,11 @@ class InventoryItemCreateJob implements ShouldQueue
      */
     public function handle(): void
     {
-        InventoryItem::query()->create($this->data);
+        Log::info('Store job for InventoryItem has been dispatched...');
+        $item = InventoryItem::query()->create($this->data);
+
+        if ($item) {
+            Log::info('Item has been successfully stored!');
+        }
     }
 }

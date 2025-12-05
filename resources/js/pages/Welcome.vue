@@ -179,7 +179,7 @@ withDefaults(
                 >
                     <form
                         @submit.prevent="
-                            formData.post(route('inventory_item.create'))
+                            formData.post(route('inventory_item.store'))
                         "
                         class="flex flex-col items-center gap-3"
                     >

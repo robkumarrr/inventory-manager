@@ -2,7 +2,8 @@
 import { dashboard, login, register } from '@/routes';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
-
+// TODO: remove the InventoryItem content from this page
+// TODO:revert this back to a simple welcome page
 interface InventoryItem {
     id: number;
     name: string;

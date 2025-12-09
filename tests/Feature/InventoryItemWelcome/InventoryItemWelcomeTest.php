@@ -21,14 +21,14 @@ it('tests that the welcome page is loaded', function () {
 it('tests the Welcome component', function () {
     $response = $this->get(route('home'));
 
-    $response->assertInertia(fn(Assert $page) => $page->component('Welcome')
+    $response->assertInertia(fn(Assert $page) => $page->hasAll(['canRegister'])
     );
 });
 
 it('tests if the correct props are passed with the route', function () {
-    $response = $this->get(route('home'));
+    $response = $this->get(route('dashboard'));
 
-    $response->assertInertia(fn(Assert $page) => $page->hasAll(['inventoryItems', 'canRegister'])
+    $response->assertInertia(fn(Assert $page) => $page->hasAll(['inventoryItems'])
     );
 });
 

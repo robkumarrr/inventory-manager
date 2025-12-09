@@ -4,7 +4,6 @@ import { dashboard } from '@/routes';
 import { type BreadcrumbItem, InventoryItem, InventoryItemForm } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
-//TODO: refactor to make dashboard the main view of the table, which should've been done in the first place
 
 const formData = useForm<InventoryItemForm>({
     name: '',

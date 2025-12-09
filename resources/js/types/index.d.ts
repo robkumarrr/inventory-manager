@@ -52,3 +52,19 @@ declare module '@vitejs/plugin-vue' {
     }
     export default function vue(options?: Options): Plugin
 }
+
+// Inventory Items
+export interface InventoryItem {
+    id: number;
+    name: string;
+    quantity: number;
+    sku: string;
+    notification_sent: boolean;
+}
+
+export interface InventoryItemForm {
+    name: string;
+    quantity: number;
+    sku: string;
+    notification_sent: boolean;
+}

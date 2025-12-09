@@ -9,12 +9,13 @@ use Laravel\Fortify\Features;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canRegister' => Features::enabled(Features::registration()),
-        'inventoryItems' => InventoryItem::all(),
     ]);
 })->name('home');
 
 Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'inventoryItems' => InventoryItem::all()
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/inventory_items', [InventoryItemController::class, 'index'])

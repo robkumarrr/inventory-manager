@@ -20,7 +20,7 @@ class InventoryItemController extends Controller
 
         Log::info('Returning InventoryItemController index');
 
-        return Inertia::render('Welcome', [
+        return Inertia::render('Dashboard', [
             'inventoryItems' => InventoryItem::all(),
             'canRegister' => fn() => !auth()->user()
         ]);
@@ -31,13 +31,7 @@ class InventoryItemController extends Controller
 
         $data = $request->validated();
 
-//        $newItem = InventoryItem::create($data);
-
         InventoryItemStoreJob::dispatch($data);
-
-//        if ($newItem) {
-//            Log::info('Data validated, the new inventory item is being added to the database.', $data);
-//        }
 
         return redirect()->back();
     }

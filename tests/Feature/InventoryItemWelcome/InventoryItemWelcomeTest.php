@@ -57,7 +57,7 @@ it('tests if the form is submitted with the correct fields', function () {
 
 it('tests if a user can create an inventory item with valid data', function () {
     Queue::fake();
-    // FIXME: test needs to pass
+
     $this->post(route('inventory_item.store'), [
         'name' => 'test',
         'quantity' => 14,
@@ -66,7 +66,23 @@ it('tests if a user can create an inventory item with valid data', function () {
         'bad_key' => 'bad_value'
     ])->assertRedirect('/');
 
-    Queue::assertPushed(InventoryItemStoreJob::class);
+    Queue::assertPushed(InventoryItemStoreJob::class, function($job) {
+        return $job->data['name'] === 'test' &&
+            $job->data['quantity'] === 14 &&
+            $job->data['sku'] === 'abcde12345' &&
+            $job->data['notification_sent'] === false;
+    });
+});
+
+it('creates a new inventory item when an InventoryItemStoreJob is dispatched', function() {
+    $job = new InventoryItemStoreJob([
+        'name' => 'test',
+        'quantity' => 14,
+        'sku' => 'abcde12345',
+        'notification_sent' => false,
+    ]);
+
+    $job->handle(); // call handle directly in this case
 
     $this->assertDatabaseHas('inventory_items', [
         'name' => 'test',

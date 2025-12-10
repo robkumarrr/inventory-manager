@@ -38,7 +38,7 @@ const breadcrumbs: BreadcrumbItem[] = [
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
             <div
-                class="flex-1 rounded-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg  lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
+                class="text-3xl dark:text-[#EDEDEC] text-center tracking-tight"
             >
                 Welcome to my Inventory Item Job Test Website
             </div>
@@ -48,16 +48,16 @@ const breadcrumbs: BreadcrumbItem[] = [
             >
                 <div>
                     <h1
-                        class="text-center text-3xl font-bold tracking-tight"
+                        class="text-center text-3xl font-bold tracking-tight pb-4"
                     >
                         All Inventory Items
                     </h1>
                 </div>
                 <div class="overflow-x-auto">
                     <table
-                        class="min-w-full divide-y divide-gray-200 rounded-lg border border-gray-200"
+                        class="min-w-full divide-y divide-neutral-800 rounded-lg border border-gray-200"
                     >
-                        <thead class="bg-gray-50">
+                        <thead class="bg-neutral-100">
                         <tr>
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
@@ -86,7 +86,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                             </th>
                         </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200 bg-white">
+                        <tbody class="divide-y divide-gray-200 bg-neutral-200">
                         <tr
                             v-for="inventoryItem in inventoryItems"
                             :key="inventoryItem.id"

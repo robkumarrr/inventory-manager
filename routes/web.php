@@ -24,7 +24,7 @@ Route::get('/inventory_items', [InventoryItemController::class, 'index'])
 Route::post('/inventory_item/store', [InventoryItemController::class, 'store'])
     ->middleware(['auth', 'verified'])->name('inventory_item.store');
 
-// note to self: the {item} must match the name of the parameter in the delete method on the controller.
+// note to self: the {item} must match the name of the parameter in the method on the controller.
 Route::delete('/inventory_item/{item}', [InventoryItemController::class, 'delete'])
     ->middleware(['auth', 'verified'])->name('inventory-item.delete');
 

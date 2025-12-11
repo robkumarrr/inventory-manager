@@ -120,18 +120,15 @@ it('updates an inventory item in the database', function () {
         'name' => 'test',
         'quantity' => 15,
     ];
-    //FIXME: fix this test..... latest issue:
-    $this->patch(route('inventory-item.update', $item,
-        $updatedFields)
+
+    $this->patch(route('inventory-item.update', $item),
+        $updatedFields
     )->assertRedirect();
 
-//    Queue::assertPushed(InventoryItemUpdateJob::class, function ($job) {
-//       return $job->data['name'] === 'test' && $job->data['quantity'] === 15;
-//    });
-
-    Queue::assertPushed(InventoryItemUpdateJob::class);
-
-//    $item->update($updatedFields);
-//
-//    $this->assertDatabaseHas('inventory_items', [ 'id' => $item->id, 'name' => 'test']);
+    Queue::assertPushed(InventoryItemUpdateJob::class, function ($job) {
+        dump($job->data);
+        dump($job->item);
+        return $job->data['name'] === 'test' &&
+           $job->data['quantity'] === 15;
+    });
 });

@@ -11,7 +11,7 @@ class InventoryItemUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,10 +22,10 @@ class InventoryItemUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string',
-            'quantity' => 'integer|gt:0',
-            'sku' => 'string',
-            'notification_sent' => 'boolean'
+            'name' => 'sometimes|string',
+            'quantity' => 'sometimes|integer|gt:0',
+            'sku' => 'sometimes|string',
+            'notification_sent' => 'sometimes|boolean'
         ];
     }
 }

@@ -60,7 +60,11 @@ class InventoryItemController extends Controller
     public function update(InventoryItem $item, InventoryItemUpdateRequest $request) {
         Log::info('Attempting to update an inventory item', ["item" => $item]);
 
+        Log::info('All request data = ', $request->all());
+
         $data = $request->validated();
+
+        Log::info('Validated data:', $data); // See what validated() returns
 
         InventoryItemUpdateJob::dispatch($data, $item);
 

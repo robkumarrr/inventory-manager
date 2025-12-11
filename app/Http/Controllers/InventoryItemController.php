@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\InventoryItemFormRequest;
+use App\Http\Requests\InventoryItemCreateRequest;
+use App\Http\Requests\InventoryItemUpdateRequest;
 use App\Jobs\InventoryItemStoreJob;
+use App\Jobs\InventoryItemUpdateJob;
 use App\Models\InventoryItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,7 +28,11 @@ class InventoryItemController extends Controller
         ]);
     }
 
-    public function store(InventoryItemFormRequest $request):  RedirectResponse {
+    /**
+     * @param InventoryItemCreateRequest $request
+     * @return RedirectResponse
+     */
+    public function store(InventoryItemCreateRequest $request):  RedirectResponse {
         Log::info('Attempting to create a new inventory item.');
 
         $data = $request->validated();
@@ -36,13 +42,23 @@ class InventoryItemController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param InventoryItem $item
+     * @return void
+     */
     public function delete(InventoryItem $item) {
         Log::info('Attempting to delete an inventory item', ["item" => $item]);
 
         $item->delete();
     }
 
-    public function update(InventoryItem $item, InventoryItemFormRequest $request) {
+
+    /**
+     * @param InventoryItem $item
+     * @param InventoryItemUpdateRequest $request
+     * @return RedirectResponse
+     */
+    public function update(InventoryItem $item, InventoryItemUpdateRequest $request) {
         Log::info('Attempting to update an inventory item', ["item" => $item]);
 
         $data = $request->validated();

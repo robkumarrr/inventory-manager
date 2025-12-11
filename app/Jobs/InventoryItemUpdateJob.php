@@ -2,8 +2,11 @@
 
 namespace App\Jobs;
 
+use App\Models\InventoryItem;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
+
 
 class InventoryItemUpdateJob implements ShouldQueue
 {
@@ -12,7 +15,7 @@ class InventoryItemUpdateJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public function __construct(public $data, public InventoryItem $item)
     {
         //
     }
@@ -22,6 +25,7 @@ class InventoryItemUpdateJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        Log::info('Attempting to update item: ', $this->item->toArray());
+        $this->item->update($this->data);
     }
 }

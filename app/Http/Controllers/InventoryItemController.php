@@ -52,7 +52,6 @@ class InventoryItemController extends Controller
         $item->delete();
     }
 
-
     /**
      * @param InventoryItem $item
      * @param InventoryItemUpdateRequest $request
@@ -63,6 +62,8 @@ class InventoryItemController extends Controller
 
         $data = $request->validated();
 
-        $item->update($data);
+        InventoryItemUpdateJob::dispatch($data, $item);
+
+        return redirect()->back()->with('success', "Item with ID: {$item->id} updated successfully");
     }
 }

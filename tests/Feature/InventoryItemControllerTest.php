@@ -5,6 +5,12 @@
 use App\Jobs\InventoryItemStoreJob;
 use App\Jobs\InventoryItemUpdateJob;
 use App\Models\InventoryItem;
+use App\Models\User;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    $this->actingAs($user);
+});
 
 it('ignores custom payload entries when creating inventory items', function () {
     $this->post(route('inventory_item.store'), [

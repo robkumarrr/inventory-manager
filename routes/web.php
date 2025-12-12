@@ -32,3 +32,7 @@ Route::patch('inventory_item/{item}', [InventoryItemController::class, 'update']
     ->middleware(['auth', 'verified'])->name('inventory-item.update');
 
 require __DIR__.'/settings.php';
+//TODO: create route for visiting a single page
+//TODO: make sure test coverage for the job dispatch is sufficient (test async functionality of job)
+//TODO: create form for updating a single record
+//TODO: dispatch a delete job too

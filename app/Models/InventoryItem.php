@@ -19,6 +19,4 @@ class InventoryItem extends Model
         'sku',
         'notification_sent'
     ];
-
-
 }

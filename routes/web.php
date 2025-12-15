@@ -12,14 +12,18 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('dashboard', function () {
+Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
         'inventoryItems' => InventoryItem::all()
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::get('/inventory_items', [InventoryItemController::class, 'index'])
     ->middleware(['auth', 'verified'])->name('inventory_item.index');
+
+Route::get('/inventory_item/{item}', [InventoryItemController::class, 'show'])
+    ->middleware(['auth', 'verified'])->name('inventory-item.show');
 
 Route::post('/inventory_item/store', [InventoryItemController::class, 'store'])
     ->middleware(['auth', 'verified'])->name('inventory_item.store');
@@ -28,7 +32,7 @@ Route::post('/inventory_item/store', [InventoryItemController::class, 'store'])
 Route::delete('/inventory_item/{item}', [InventoryItemController::class, 'delete'])
     ->middleware(['auth', 'verified'])->name('inventory-item.delete');
 
-Route::patch('inventory_item/{item}', [InventoryItemController::class, 'update'])
+Route::patch('/inventory_item/{item}', [InventoryItemController::class, 'update'])
     ->middleware(['auth', 'verified'])->name('inventory-item.update');
 
 require __DIR__.'/settings.php';

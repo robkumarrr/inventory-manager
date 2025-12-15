@@ -29,6 +29,15 @@ class InventoryItemController extends Controller
     }
 
     /**
+     * @param string $item
+     * @return void
+     */
+    public function show(string $item)
+    {
+        Log::info('');
+    }
+
+    /**
      * @param InventoryItemCreateRequest $request
      * @return RedirectResponse
      */

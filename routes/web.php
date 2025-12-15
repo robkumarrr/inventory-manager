@@ -12,15 +12,8 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', [
-        'inventoryItems' => InventoryItem::all()
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/inventory_items', [InventoryItemController::class, 'index'])
-    ->middleware(['auth', 'verified'])->name('inventory_item.index');
+Route::get('/dashboard', [InventoryItemController::class, 'index'])
+    ->middleware(['auth', 'verified'])->name('dashboard'); // TODO: rename to: 'inventory_item.index'
 
 Route::get('/inventory_item/{item}', [InventoryItemController::class, 'show'])
     ->middleware(['auth', 'verified'])->name('inventory-item.show');

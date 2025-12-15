@@ -16,7 +16,7 @@ use Inertia\Response;
 class InventoryItemController extends Controller
 {
     /**
-     * @return \Inertia\Response
+     * @return Response
      */
     public function index(): Response {
 
@@ -30,11 +30,15 @@ class InventoryItemController extends Controller
 
     /**
      * @param string $item
-     * @return void
+     * @return Response
      */
-    public function show(string $item)
+    public function show(InventoryItem $item): Response
     {
-        Log::info('');
+        Log::info('Viewing a single item');
+
+        return Inertia::render('inventoryItems/Show', [
+           'inventoryItem' => $item
+        ]);
     }
 
     /**

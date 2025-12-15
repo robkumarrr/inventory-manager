@@ -38,17 +38,17 @@ const breadcrumbs: BreadcrumbItem[] = [
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
             <div
-                class="text-3xl dark:text-[#EDEDEC] text-center tracking-tight"
+                class="text-center text-3xl tracking-tight dark:text-[#EDEDEC]"
             >
                 Welcome to my Inventory Item Job Test Website
             </div>
 
             <div
-                class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg  lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
+                class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
             >
                 <div>
                     <h1
-                        class="text-center text-3xl font-bold tracking-tight pb-4"
+                        class="pb-4 text-center text-3xl font-bold tracking-tight"
                     >
                         All Inventory Items
                     </h1>
@@ -58,124 +58,123 @@ const breadcrumbs: BreadcrumbItem[] = [
                         class="min-w-full divide-y divide-neutral-800 rounded-lg border border-gray-200"
                     >
                         <thead class="bg-neutral-100">
-                        <tr>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                            >
-                                ID
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                            >
-                                Name
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                            >
-                                Quantity
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                            >
-                                SKU
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                            >
-                                Actions
-                            </th>
-                        </tr>
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                >
+                                    ID
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                >
+                                    Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                >
+                                    Quantity
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                >
+                                    SKU
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
+                                >
+                                    Actions
+                                </th>
+                            </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-neutral-200">
-                        <tr
-                            v-for="inventoryItem in inventoryItems"
-                            :key="inventoryItem.id"
-                            class="transition-colors hover:bg-gray-50"
-                        >
-                            <td
-                                class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                            <tr
+                                v-for="inventoryItem in inventoryItems"
+                                :key="inventoryItem.id"
+                                class="transition-colors hover:bg-gray-50"
                             >
-                                {{ inventoryItem.id }}
-                            </td>
-                            <td
-                                class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
-                            >
-                                {{ inventoryItem.name }}
-                            </td>
-                            <td
-                                class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
-                            >
-                                {{ inventoryItem.quantity }}
-                            </td>
-                            <td
-                                class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
-                            >
-                                {{ inventoryItem.sku }}
-                            </td>
-                            <td
-                                class="px-6 py-4 text-sm whitespace-nowrap"
-                            >
-                                <Link
-                                    :href="
-                                                route(
-                                                    'inventory-item.delete',
-                                                    inventoryItem.id,
-                                                )
-                                            "
-                                    method="delete"
-                                    class="font-medium text-red-600 transition-colors hover:text-red-900 hover:cursor-pointer"
+                                <td
+                                    class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
                                 >
-                                    Delete
-                                </Link>
-                            </td>
-                        </tr>
+                                    {{ inventoryItem.id }}
+                                </td>
+                                <td
+                                    class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                                >
+                                    <Link
+                                        :href="route('inventory-item.show', inventoryItem.id)"
+                                    >
+                                        {{ inventoryItem.name }}
+                                    </Link>
+                                </td>
+                                <td
+                                    class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                                >
+                                    {{ inventoryItem.quantity }}
+                                </td>
+                                <td
+                                    class="px-6 py-4 text-sm whitespace-nowrap text-gray-900"
+                                >
+                                    {{ inventoryItem.sku }}
+                                </td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap">
+                                    <Link
+                                        :href="
+                                            route(
+                                                'inventory-item.delete',
+                                                inventoryItem.id,
+                                            )
+                                        "
+                                        method="delete"
+                                        class="font-medium text-red-600 transition-colors hover:cursor-pointer hover:text-red-900"
+                                    >
+                                        Delete
+                                    </Link>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div
-                class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg  lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
+                class="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"
             >
                 <form
                     @submit.prevent="
-                            formData.post(route('inventory_item.store'))
-                        "
+                        formData.post(route('inventory_item.store'))
+                    "
                     class="flex flex-col items-center gap-3"
                 >
                     <h1>Add a New Inventory Item</h1>
                     <label
-                    >Name:
+                        >Name:
                         <input
                             v-model="formData.name"
                             type="text"
                             placeholder="Add a name for this new item..."
-                        /></label>
+                    /></label>
                     <div class="text-red-500" v-if="formData.errors.name">
                         {{ formData.errors.name }}
                     </div>
 
                     <label
-                    >Quantity:
+                        >Quantity:
                         <input
                             v-model="formData.quantity"
                             type="number"
                             placeholder="Add quantity for this new item..."
-                        /></label>
-                    <div
-                        class="text-red-500"
-                        v-if="formData.errors.quantity"
-                    >
+                    /></label>
+                    <div class="text-red-500" v-if="formData.errors.quantity">
                         {{ formData.errors.quantity }}
                     </div>
 
                     <label
-                    >SKU:
+                        >SKU:
                         <input
                             v-model="formData.sku"
                             type="text"
                             maxlength="10"
                             placeholder="Add a SKU for this new item..."
-                        /></label>
+                    /></label>
                     <div class="text-red-500" v-if="formData.errors.sku">
                         {{ formData.errors.sku }}
                     </div>

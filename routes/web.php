@@ -13,7 +13,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', [InventoryItemController::class, 'index'])
-    ->middleware(['auth', 'verified'])->name('dashboard'); // TODO: rename to: 'inventory_item.index'
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/inventory_item/{item}', [InventoryItemController::class, 'show'])
     ->middleware(['auth', 'verified'])->name('inventory-item.show');
@@ -28,8 +28,7 @@ Route::delete('/inventory_item/{item}', [InventoryItemController::class, 'delete
 Route::patch('/inventory_item/{item}', [InventoryItemController::class, 'update'])
     ->middleware(['auth', 'verified'])->name('inventory-item.update');
 
-require __DIR__.'/settings.php';
-//TODO: create route for visiting a single page
+require __DIR__ . '/settings.php';
 //TODO: make sure test coverage for the job dispatch is sufficient (test async functionality of job)
 //TODO: create form for updating a single record
 //TODO: dispatch a delete job too

@@ -24,8 +24,13 @@ const breadcrumbs: BreadcrumbItem[] = [
 <template>
     <Head title="Dashboard" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div>Inventory Item</div>
-        <div>{{ inventoryItem.id }}</div>
+        <div class="m-10">
+            <h1 class="text-2xl">Inventory Item</h1>
+            <div>Item ID: {{ inventoryItem.id }}</div>
+            <div>Item Name: {{ inventoryItem.name }}</div>
+            <div>Item SKU: {{ inventoryItem.sku }}</div>
+            <div>Notification Sent: {{ inventoryItem.notification_sent ? '[ X ]' : '[  ]' }}</div>
+        </div>
     </AppLayout>
 </template>
 
